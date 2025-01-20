@@ -3,8 +3,11 @@ import Title from "../../feachers/Titel";
 import axios from "axios";
 import { user } from "../../feachers/apis";
 import { toast } from "react-toastify";
+import axiosInstance from "../../utils/axiosInstance";
 
 export const SignupForm = ({ data, setData }) => {
+
+  // on signup function
   const onSignup = () => {
     const postObj = {
       firstName: data.firstName,
@@ -13,14 +16,14 @@ export const SignupForm = ({ data, setData }) => {
       lastName: data.lastName,
       userName: data.userName,
     };
-    console.log(postObj)
-        axios.post(`http://10.10.10.23:3030/api/users/createUser`,postObj)
-        .then((response) => {
-          console.log(response)
-        })
-        .catch((error) => {
-          toast.error("error,please try again!")
-        });
+    axiosInstance
+      .post(`/user/createUser`, postObj)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        toast.error("Error, please try again!");
+      });
   };
   return (
     <div className="w-full h-screen bg-green-100 flex justify-center items-center">

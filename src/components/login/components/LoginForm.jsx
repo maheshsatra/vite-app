@@ -3,33 +3,37 @@ import Title from "../../feachers/Titel";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { HiRefresh } from "react-icons/hi";
+import axiosInstance from "../../utils/axiosInstance";
 
 export const LoginForm = ({ data, setData }) => {
 
   // login function
-  const onLogin = () => {
-    const postObj = {
-      captcha: data.captcha,
-      txnId: data.captchaInfo.txnId,
-      userName: data.userName,
-      password: data.password,
-    };
-    axios.post(`http://10.10.10.23:3030/api/users/login`,postObj)
+// LoginForm.js
+
+const onLogin = () => {
+  const postObj = {
+    captcha: data.captcha,
+    txnId: data.captchaInfo.txnId,
+    userName: data.userName,
+    password: data.password,
+  };
+  axiosInstance
+    .post(`/user/login`, postObj)
     .then((response) => {
-      // console.log(response.data)
-      toast.success(response.data.message)
+      toast.success(response.data.message);
       localStorage.setItem("loginInfo", JSON.stringify(response.data));
     })
     .catch((error) => {
-      toast.error("error,please try again!")
+      toast.error("Error, please try again!");
       getCaptch();
     });
-  };
+};
+
 
   // get Captch function
   const getCaptch = async () => {
     axios
-      .get(`http://10.10.10.23:3030/api/users/getCaptcha`)
+      .get(`http://10.10.10.23:3030/api/user/getCaptcha`)
       .then((response) => {
         setData({ ...data, captchaInfo: response.data });
       })
