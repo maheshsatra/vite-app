@@ -1,9 +1,7 @@
 import React from "react";
-import Title from "../../feachers/Titel";
-import axios from "axios";
-import { user } from "../../feachers/apis";
 import { toast } from "react-toastify";
-import axiosInstance from "../../utils/axiosInstance";
+import axiosInstance from "../../../components/utils/axiosInstance";
+import Title from "../../../components/feachers/Titel";
 
 export const SignupForm = ({ data, setData }) => {
 

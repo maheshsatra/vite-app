@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
-import Title from "../../feachers/Titel";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { HiRefresh } from "react-icons/hi";
-import axiosInstance from "../../utils/axiosInstance";
+import axiosInstance from "../../../components/utils/axiosInstance";
+import { useNavigate } from "react-router-dom";
+import Title from "../../../components/feachers/Titel"
 
 export const LoginForm = ({ data, setData }) => {
-
-  // login function
-// LoginForm.js
+const navigate = useNavigate()
 
 const onLogin = () => {
   const postObj = {
@@ -22,6 +21,7 @@ const onLogin = () => {
     .then((response) => {
       toast.success(response.data.message);
       localStorage.setItem("loginInfo", JSON.stringify(response.data));
+      navigate("/home")
     })
     .catch((error) => {
       toast.error("Error, please try again!");
@@ -43,16 +43,10 @@ const onLogin = () => {
       });
   };
 
-  // checking user logined or not
-  const navigateToHome = () => {
-    var loginRes = localStorage.getItem("loginInfo");
-    console.log(JSON.parse(loginRes));
-}
-
 
   useEffect(() => {
     getCaptch();
-    navigateToHome()
+    // navigateToHome()
   }, []);
   return (
     <div className="w-full h-screen bg-green-100 flex justify-center items-center">

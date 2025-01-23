@@ -5,7 +5,6 @@ import { initialState } from './components/utilities'
 
 const Login = () => {
     const[data,setData]=useState(initialState)
-    console.log(data)
   return (
     <>
     {data.isLogin ?
