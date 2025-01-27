@@ -4,21 +4,22 @@ import { setPrice, ShortTitel } from "../../../components/feachers/shortTitele";
 import { removeFromCart } from "../../../components/redux/cartSlice";
 import Discount from "./Discount";
 import { BsTrash3Fill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const ItemInfo = () => {
   const [showItems, setShowItems] = useState(true);
-  const [showDiscount, setShowDiscount] = useState(false); 
+  const [showDiscount, setShowDiscount] = useState(false);
   const cartItem = useSelector((state) => state.cart);
-  console.log(cartItem)
+  console.log(cartItem);
   const dispatch = useDispatch();
 
   const handleItemToggle = () => {
     setShowItems(!showItems);
-    setShowDiscount(false);   
- };
+    setShowDiscount(false);
+  };
 
   const handleDiscountToggle = () => {
-    setShowDiscount(!showDiscount); 
+    setShowDiscount(!showDiscount);
     setShowItems(false);
   };
 
@@ -27,11 +28,15 @@ const ItemInfo = () => {
       <div className="w-full bg-green-50 p-2">
         <p
           className="w-full bg-green-100 p-2 cursor-pointer font-bold"
-          onClick={handleItemToggle} 
+          onClick={handleItemToggle}
         >
           Item Info
         </p>
-        <div className={`w-full py-4 px-2  ${cartItem.itemList.length > 5} ? "h-[200px] overflow-y-auto" : "h-auto"`}>
+        <div
+          className={`w-full py-4 px-2  ${
+            cartItem.itemList.length > 5
+          } ? "h-[200px] overflow-y-auto" : "h-auto"`}
+        >
           {showItems && (
             <>
               {cartItem.itemList.length > 0 ? (
@@ -49,7 +54,7 @@ const ItemInfo = () => {
                     {cartItem.itemList.map((list, inx) => (
                       <tr key={inx} className="border-b-2">
                         <td className="p-2">{inx + 1}</td>
-                        <td className="p-2">{ShortTitel(list.title,30)}</td>
+                        <td className="p-2">{ShortTitel(list.title, 30)}</td>
                         <td className="p-2">{list.quantity}</td>
                         <td className="p-2">{setPrice(list.price)}</td>
                         <td
@@ -63,7 +68,11 @@ const ItemInfo = () => {
                   </tbody>
                 </table>
               ) : (
-                "No Items"
+                <>
+                  <div>
+                    No Items Go To Products. <Link to="/home" className="text-green-700 font-semibold">Click me</Link>
+                  </div>{" "}
+                </>
               )}
             </>
           )}
@@ -76,11 +85,7 @@ const ItemInfo = () => {
         >
           Discount
         </p>
-        <div className="w-full py-4 px-2 ">
-          {showDiscount && 
-          <Discount />
-          }
-        </div>
+        <div className="w-full py-4 px-2 ">{showDiscount && <Discount />}</div>
       </div>
     </>
   );
