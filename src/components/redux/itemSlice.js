@@ -11,7 +11,7 @@ export const getItemsData = createAsyncThunk(
   async (url) => {
     const response = await fetch(url, {
       headers: {
-        Authorization: `${JSON.parse(localStorage.getItem("loginInfo"))?.token}`,
+        Authorization: `Barar ${JSON.parse(localStorage.getItem("loginInfo"))?.token}`,
       },
     });
     if (!response.ok) {

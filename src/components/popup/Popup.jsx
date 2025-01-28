@@ -1,16 +1,22 @@
 import React from 'react';
 
-const Popup = ({ isOpen, onClose, title, content }) => {
+const Popup = ({ isOpen, onClose, title, content, size }) => {
   if (!isOpen) return null;
 
+  const sizeClasses = {
+    xxl: 'w-full',  
+    xl: 'w-[80%]',
+    lg: 'w-[60%]',
+    md: 'w-[40%]',
+  };
+
+  const popupWidth = sizeClasses[size] || sizeClasses.md;
+
   return (
-    <div
-      className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50"
-      onClick={onClose}
-    >
+    <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
       <div
-        className="bg-white p-6 rounded-lg w-96"
-        onClick={(e) => e.stopPropagation()} 
+        className={`bg-white p-6 rounded-lg ${popupWidth}`}
+        onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold">{title}</h2>
