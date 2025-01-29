@@ -1,12 +1,12 @@
 import React from "react";
-import Title from "../feachers/Titel";
+import Title from "../../../components/feachers/Titel";
 import { useDispatch, useSelector } from "react-redux";
-import { setPrice, ShortTitel } from "../feachers/shortTitele";
-import { removeFromCart } from "../redux/cartSlice";
+import { setPrice, ShortTitel } from "../../../components/feachers/shortTitele";
+import { removeFromCart } from "../../../components/redux/cartSlice";
 import { useNavigate } from "react-router-dom";
 import { BsTrash3Fill } from "react-icons/bs";
 
-const Cart = () => {
+const HomeCart = () => {
   const cartItem = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate()
@@ -21,7 +21,7 @@ const Cart = () => {
       <thead>
         <tr className="bg-green-700 text-white">
           <th className="p-2 w-[10%]">Sno</th>
-          <th className="p-2 w-[45%]">Name</th>
+          <th className="p-2 w-[40%]">Name</th>
           <th className="p-2">Quantity</th>
           <th className="p-2">Price</th>
           <th className="p-2">Remove</th>
@@ -31,9 +31,9 @@ const Cart = () => {
         {cartItem.itemList.map((list, inx) => (
           <tr key={inx} className="border-b-2 text-[14px]">
             <td className="p-2">{inx + 1}</td>
-            <td className="p-2">{ShortTitel(list.title,25)}</td>
+            <td className="p-2">{ShortTitel(list.itemName,20)}</td>
             <td className="p-2">{list.quantity}</td>
-            <td className="p-2">{setPrice(list.price)}</td>
+            <td className="p-2">{setPrice(list.discountPrice)}</td>
             <td
               className="p-2 cursor-pointer text-green-700 font-semibold"
               onClick={() => dispatch(removeFromCart(list))}
@@ -60,4 +60,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default HomeCart;

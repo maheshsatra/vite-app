@@ -7,7 +7,7 @@ export const Initialstate = {
     itemDesc: "",
     itemImage: "",
     itemCategory: "",
+    itemQuantity:"",
     itemId: null,
   },
-  itemsList:[]
 };

@@ -1,10 +1,10 @@
 import React from "react";
 import { toast } from "react-toastify";
-import axiosInstance from "../../../components/utils/axiosInstance";
+import axiosInstance from "../../../components/services/axiosInstance";
 import Title from "../../../components/feachers/Titel";
 
 export const SignupForm = ({ data, setData }) => {
-
+  const userAxios = createAxiosInstance('user')
   // on signup function
   const onSignup = () => {
     const postObj = {
@@ -14,7 +14,7 @@ export const SignupForm = ({ data, setData }) => {
       lastName: data.lastName,
       userName: data.userName,
     };
-    axiosInstance
+    userAxios
       .post(`/user/createUser`, postObj)
       .then((response) => {
         console.log(response);

@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { setPrice, ShortTitel } from '../feachers/shortTitele';
-import { getItemsData } from "../../components/redux/itemSlice";
-import Title from "../feachers/Titel"
-import { addToCart } from '../redux/cartSlice';
-const Items = () => {
+import Title from '../../../components/feachers/Titel';
+import { addToCart } from '../../../components/redux/cartSlice';
+ import { getItemsData } from "../../../components/redux/itemSlice";
+import { setPrice, ShortTitel } from '../../../components/feachers/shortTitele';
+
+const HomeItems = () => {
     const dispatch = useDispatch();
 
     const { items, status, isError } = useSelector((state) => state.items);
@@ -19,7 +20,7 @@ const Items = () => {
             {items && items.length > 0 ? (
               items.map((list) => (
                 <div
-                  key={list.id}
+                  key={list._id}
                   className="w-full p-2 border border-gray-200 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
                 >
                   <div className="flex justify-center mb-4"  title={list.itemName}>
@@ -48,4 +49,4 @@ const Items = () => {
   )
 }
 
-export default Items
+export default HomeItems

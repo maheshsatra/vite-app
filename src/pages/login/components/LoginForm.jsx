@@ -2,13 +2,14 @@ import React, { useEffect } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { HiRefresh } from "react-icons/hi";
-import axiosInstance from "../../../components/utils/axiosInstance";
+import axiosInstance from "../../../components/services/axiosInstance";
 import { useNavigate } from "react-router-dom";
 import Title from "../../../components/feachers/Titel"
+import createAxiosInstance from "../../../components/services/axiosInstance";
 
 export const LoginForm = ({ data, setData }) => {
 const navigate = useNavigate()
-
+const userAxios = createAxiosInstance('user')
 const onLogin = () => {
   const postObj = {
     captcha: data.captcha,
@@ -16,7 +17,7 @@ const onLogin = () => {
     userName: data.userName,
     password: data.password,
   };
-  axiosInstance
+  userAxios
     .post(`/user/login`, postObj)
     .then((response) => {
       toast.success(response.data.message);

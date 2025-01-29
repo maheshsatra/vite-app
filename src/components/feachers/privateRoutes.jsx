@@ -6,14 +6,20 @@ import { useSelector } from "react-redux";
 
 function PrivateRoutes() {
   const token = useAuth();
-  const sideMenuStatus = useSelector((state) => state.sidemenu.isShowSideMenu)
-  console.log(sideMenuStatus)
+  const sideMenuStatus = useSelector((state) => state.sidemenu.isShowSideMenu);
+  console.log(sideMenuStatus);
   return token ? (
     <>
       <Header />
-      <div className="w-full flex gap-2">
-       {sideMenuStatus && <div className="w-[20%]"><SideMenu  /></div>}
+      <div className="flex w-full min-h-screen bg-gray-50">
+        {sideMenuStatus && (
+          <div className="w-[250px] bg-white shadow-lg hidden lg:block">
+            <SideMenu />
+          </div>
+        )}
+        <div className="flex-1 bg-white">
           <Outlet />
+        </div>
       </div>
     </>
   ) : (

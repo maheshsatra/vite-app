@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import Items from "../../components/items/Items";
-import Cart from "../../components/cart/Cart";
+import HomeItems from "./componets/HomeItems";
+import HomeCart from "./componets/HomeCart";
 
 
 const Home = () => {
@@ -9,10 +9,10 @@ const Home = () => {
     <>
       <div className="w-full bg-green-50 p-2 h-full flex gap-4">    
           <div className="w-[60%] max-h-[530px] overflow-y-auto">
-         <Items />
+         <HomeItems />
           </div>            
           <div className="w-[40%]">
-         <Cart />
+         <HomeCart />
           </div>
         </div>
     </>
