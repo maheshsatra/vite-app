@@ -26,7 +26,7 @@ export const itemSlice = createSlice({
   reducers: {
     deleteItemById: (state, action) => {
       console.log(action, state.items);
-      state.items = state.items.filter((item) => item.id !== action.payload);
+      // state.items = state.items.filter((item) => item.id !== action.payload);
     },
   },
   extraReducers: (builder) => {
