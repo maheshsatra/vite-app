@@ -65,40 +65,42 @@ const ItemList = ({ data, setData }) => {
           <th className="border border-gray-300 p-2">Item Price</th>
           <th className="border border-gray-300 p-2">Actions</th>
         </tr>
-        {items && items.length > 0
-          ? items.map((list, inx) => {
-              return (
-                <tr key={list._id}>
-                  <td className="border border-gray-300 p-2">{inx + 1}</td>
-                  <td className="border border-gray-300 p-2">
-                    <img
-                      src={list.itemImage}
-                      alt={list.itemName}
-                      className="w-[50px] h-[50px] object-contain"
+        {items && items.length > 0 ? (
+          items.map((list, inx) => {
+            return (
+              <tr key={list._id}>
+                <td className="border border-gray-300 p-2">{inx + 1}</td>
+                <td className="border border-gray-300 p-2">
+                  <img
+                    src={list.itemImage}
+                    alt={list.itemName}
+                    className="w-[50px] h-[50px] object-contain"
+                  />
+                </td>
+                <td className="border border-gray-300 p-2">{list.itemName}</td>
+                <td className="border border-gray-300 p-2">
+                  {setPrice(list.itemPrice)}
+                </td>
+                <td className="border border-gray-300 p-2">
+                  <div className="w-full flex gap-3">
+                    <MdEdit
+                      onClick={(e) => onEdit(list)}
+                      className="text-green-700 w-5 h-5 cursor-pointer"
                     />
-                  </td>
-                  <td className="border border-gray-300 p-2">
-                    {list.itemName}
-                  </td>
-                  <td className="border border-gray-300 p-2">
-                    {setPrice(list.itemPrice)}
-                  </td>
-                  <td className="border border-gray-300 p-2">
-                    <div className="w-full flex gap-3">
-                      <MdEdit
-                        onClick={(e) => onEdit(list)}
-                        className="text-green-700 w-5 h-5 cursor-pointer"
-                      />
-                      <FaRegTrashAlt
-                        onClick={(e) => onRemoveItem(list)}
-                        className="text-red-700 w-5 h-5 cursor-pointer"
-                      />
-                    </div>
-                  </td>
-                </tr>
-              );
-            })
-          : "no items"}
+                    <FaRegTrashAlt
+                      onClick={(e) => onRemoveItem(list)}
+                      className="text-red-700 w-5 h-5 cursor-pointer"
+                    />
+                  </div>
+                </td>
+              </tr>
+            );
+          })
+        ) : (
+          <tr>
+            <td colSpan={3}>No Items Available</td>
+          </tr>
+        )}
       </table>
     </>
   );

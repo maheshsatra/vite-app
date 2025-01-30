@@ -25,7 +25,7 @@ const ItemInfo = () => {
 
   return (
     <>
-      <div className="w-full bg-green-50 p-2">
+      <div className="w-full">
         <p
           className="w-full bg-green-100 p-2 cursor-pointer font-bold"
           onClick={handleItemToggle}
@@ -70,7 +70,10 @@ const ItemInfo = () => {
               ) : (
                 <>
                   <div>
-                    No Items Go To Products. <Link to="/home" className="text-green-700 font-semibold">Click me</Link>
+                    No Items Go To Products.{" "}
+                    <Link to="/home" className="text-green-700 font-semibold">
+                      Click me
+                    </Link>
                   </div>{" "}
                 </>
               )}
@@ -78,7 +81,7 @@ const ItemInfo = () => {
           )}
         </div>
       </div>
-      <div className="w-full bg-green-50 p-2">
+      <div className="w-full bg-green-50">
         <p
           className="w-full bg-green-100 p-2 cursor-pointer font-bold"
           onClick={handleDiscountToggle} // Toggle discount info

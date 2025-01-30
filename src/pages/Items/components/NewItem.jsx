@@ -163,7 +163,11 @@ const NewItem = ({ data, setData }) => {
               <img
                 src={data?.newItem?.itemImage}
                 className="w-[100px] h-[100px] object-contain"
-                alt={data.newItem.itemName ? data.newItem.itemName : "new item"}
+                alt={
+                  data.newItem.itemName
+                    ? data.newItem.itemName
+                    : "No Item Available"
+                }
               />
             </div>
           )}
