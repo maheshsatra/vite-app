@@ -54,9 +54,9 @@ const ItemInfo = () => {
                     {cartItem.itemList.map((list, inx) => (
                       <tr key={inx} className="border-b-2">
                         <td className="p-2">{inx + 1}</td>
-                        <td className="p-2">{ShortTitel(list.title, 30)}</td>
+                        <td className="p-2">{ShortTitel(list.itemName, 30)}</td>
                         <td className="p-2">{list.quantity}</td>
-                        <td className="p-2">{setPrice(list.price)}</td>
+                        <td className="p-2">{setPrice(list.itemPrice)}</td>
                         <td
                           className="p-2 cursor-pointer text-green-700 font-semibold"
                           onClick={() => dispatch(removeFromCart(list))}

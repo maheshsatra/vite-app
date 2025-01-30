@@ -1,5 +1,12 @@
 export const ShortTitel = (name, num = 10) => {
-  let newName = name.slice(0, num);
+  let newName = "";
+  let count = 0;
+  for (let i = 0; i < name.length; i++) {
+    if (count >= num) break;
+    newName += name[i];
+    count++;
+  }
+
   let capitalizedText = newName
     .split(" ")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
