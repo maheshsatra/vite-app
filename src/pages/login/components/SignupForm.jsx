@@ -1,10 +1,10 @@
 import React from "react";
 import { toast } from "react-toastify";
-import axiosInstance from "../../../components/services/axiosInstance";
 import Title from "../../../components/feachers/Titel";
+import createAxiosInstance from "../../../components/services/axiosInstance";
 
 export const SignupForm = ({ data, setData }) => {
-  const userAxios = createAxiosInstance('user')
+  const userAxios = createAxiosInstance("user");
   // on signup function
   const onSignup = () => {
     const postObj = {
@@ -105,7 +105,7 @@ export const SignupForm = ({ data, setData }) => {
                 />
               </div>
               <button
-                class="bg-green-500 text-white py-2 px-4 rounded-md font-semibold hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
+                class="w-full bg-green-500 text-white py-2 px-4 rounded-md font-semibold hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
                 onClick={onSignup}
               >
                 Create
@@ -121,7 +121,7 @@ export const SignupForm = ({ data, setData }) => {
                       name: "",
                       email: "",
                       password: "",
-                      captcha:"",
+                      captcha: "",
                     })
                   }
                 >

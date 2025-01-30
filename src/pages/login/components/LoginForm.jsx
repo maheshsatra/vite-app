@@ -4,32 +4,31 @@ import axios from "axios";
 import { HiRefresh } from "react-icons/hi";
 import axiosInstance from "../../../components/services/axiosInstance";
 import { useNavigate } from "react-router-dom";
-import Title from "../../../components/feachers/Titel"
+import Title from "../../../components/feachers/Titel";
 import createAxiosInstance from "../../../components/services/axiosInstance";
 
 export const LoginForm = ({ data, setData }) => {
-const navigate = useNavigate()
-const userAxios = createAxiosInstance('user')
-const onLogin = () => {
-  const postObj = {
-    captcha: data.captcha,
-    txnId: data.captchaInfo.txnId,
-    userName: data.userName,
-    password: data.password,
+  const navigate = useNavigate();
+  const userAxios = createAxiosInstance("user");
+  const onLogin = () => {
+    const postObj = {
+      captcha: data.captcha,
+      txnId: data.captchaInfo.txnId,
+      userName: data.userName,
+      password: data.password,
+    };
+    userAxios
+      .post(`/user/login`, postObj)
+      .then((response) => {
+        toast.success(response.data.message);
+        localStorage.setItem("loginInfo", JSON.stringify(response.data));
+        navigate("/home");
+      })
+      .catch((error) => {
+        toast.error("Error, please try again!");
+        getCaptch();
+      });
   };
-  userAxios
-    .post(`/user/login`, postObj)
-    .then((response) => {
-      toast.success(response.data.message);
-      localStorage.setItem("loginInfo", JSON.stringify(response.data));
-      navigate("/home")
-    })
-    .catch((error) => {
-      toast.error("Error, please try again!");
-      getCaptch();
-    });
-};
-
 
   // get Captch function
   const getCaptch = async () => {
@@ -43,7 +42,6 @@ const onLogin = () => {
         toast.error("error,please try again!");
       });
   };
-
 
   useEffect(() => {
     getCaptch();
@@ -68,7 +66,9 @@ const onLogin = () => {
                   placeholder="Enter your User Name"
                   className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   value={data.userName}
-                  onChange={(e) => setData({ ...data, userName: e.target.value })}
+                  onChange={(e) =>
+                    setData({ ...data, userName: e.target.value })
+                  }
                 />
               </div>
               <div className="w-full mb-4">
@@ -86,45 +86,45 @@ const onLogin = () => {
                 />
               </div>
               <div className="w-full">
-              <label className="block text-sm font-medium text-gray-700 capitalize">
-                captcha
-                </label> 
-                              <div className="w-full mb-2 flex gap-4 rounded-md">              
-                <div className="w-[85%] relative">
-                  <img
-                    src="/bg.jpg"
-                    alt="Login Image"
-                    className="w-full h-[40px] rounded-md"
-                  />
-                  <span className="absolute top-1 left-[40%] text-[20px] font-semibold text-gray-600 tracking-wider">
-                    {data?.captchaInfo?.captcha?.text}
-                  </span>
+                <label className="block text-sm font-medium text-gray-700 capitalize">
+                  captcha
+                </label>
+                <div className="w-full mb-2 flex gap-4 rounded-md">
+                  <div className="w-[85%] relative">
+                    <img
+                      src="/bg.jpg"
+                      alt="Login Image"
+                      className="w-full h-[40px] rounded-md"
+                    />
+                    <span className="absolute top-1 left-[40%] text-[20px] font-semibold text-gray-600 tracking-wider">
+                      {data?.captchaInfo?.captcha?.text}
+                    </span>
+                  </div>
+                  <div className="w-auto">
+                    <HiRefresh
+                      className="w-6 h-6 mt-2 cursor-pointer"
+                      onClick={getCaptch}
+                    />
+                  </div>
                 </div>
-                <div className="w-auto">
-                  <HiRefresh
-                    className="w-6 h-6 mt-2 cursor-pointer"
-                    onClick={getCaptch}
-                  />
-                </div>
-              </div>
-              <div className="w-full mb-4">
-                {/* <label className="block text-sm font-medium text-gray-700 capitalize">
+                <div className="w-full mb-4">
+                  {/* <label className="block text-sm font-medium text-gray-700 capitalize">
                 captcha
                 </label> */}
-                <input
-                  type="text"
-                  placeholder="Enter your Captcha"
-                  className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  value={data.captcha}
-                  onChange={(e) =>
-                    setData({ ...data, captcha: e.target.value })
-                  }
-                />
-              </div>
+                  <input
+                    type="text"
+                    placeholder="Enter your Captcha"
+                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    value={data.captcha}
+                    onChange={(e) =>
+                      setData({ ...data, captcha: e.target.value })
+                    }
+                  />
+                </div>
               </div>
 
               <button
-                class="bg-green-500 text-white py-2 px-4 rounded-md font-semibold hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
+                class="w-full bg-green-500 text-white py-2 px-4 rounded-md font-semibold hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
                 onClick={onLogin}
               >
                 Submit
@@ -140,7 +140,7 @@ const onLogin = () => {
                       name: "",
                       email: "",
                       password: "",
-                      captcha:"",
+                      captcha: "",
                     })
                   }
                 >
